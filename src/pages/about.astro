@@ -1,21 +1,72 @@
 ---
+import '../styles/style.css'
+import Navigation from '../components/Navigation.astro';
+import Footer from '../components/Footer.astro';
+const pageTitle = "About Me";
+
+const identity = {
+  firstName: "Diego",
+  country: "Chile",
+  occupation: "Web developer",
+  hobbies: ["Skate", "Calistenia", "Solar punk"],
+};
+
+const skills = ["HTML", "CSS", "JavaScript", "Vue3", "Astro", "Writing Docs"];
+
+const skillColor = "navy";
+const fontWeight ="bold";
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<link rel="stylesheet" href="../styles/style.css">
-		<title>Mi blog</title>
-	</head>
-	<body>
-        <header>
-            <nav>
-                <a href="/">Home</a>
-            </nav>
-        </header>
-		<h1>Hola desde about</h1>
-	</body>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>{pageTitle}</title>
+    <style define:vars={{skillColor, fontWeight}}> 
+        h1 {
+          color: purple;
+          font-size: 4rem;
+        }
+        .skill {
+
+          color: var(--skillColor);
+          font-weight: var(--fontWeight);
+        }
+      </style>
+  </head>
+  <body>
+    <Navigation></Navigation>
+    <h1>{pageTitle}</h1>
+    <h2>... and my new Astro site!</h2>
+
+    <p>
+      I am working through Astro's introductory tutorial. This is the second
+      page on my website, and it's the first one I built myself!
+    </p>
+
+    <p>
+      This site will update as I complete more of the tutorial, so keep checking
+      back and see how my journey is going!
+    </p>
+    <p>Here are a few facts about me:</p>
+    <ul>
+      <li>My name is {identity.firstName}.</li>
+      <li>
+        I live in {identity.country} and I work as a {identity.occupation}.
+      </li>
+      {
+        identity.hobbies.length >= 2 && (
+          <li>
+            Two of my hobbies are: {identity.hobbies[0]} and{" "}
+            {identity.hobbies[1]}
+          </li>
+        )
+      }
+    </ul>
+    <p>My skills are</p>
+    <ul>
+      {skills.map((skills) => <li class="skill">{skills}</li>)}
+    </ul>
+    <Footer/>
+  </body>
 </html>
